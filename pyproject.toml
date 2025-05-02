@@ -1,0 +1,27 @@
+[tool.black]
+# Maximum line length (PEP 8 recommends 79; 88 is Black’s default)
+line-length = 88
+
+# Target Python versions—adjust to suit your project
+target-version = ["py312"]
+
+# Only format .py files
+include = '\.py$'
+
+# Ignore VCS dirs, virtualenvs, build artifacts, migrations, etc.
+exclude = '''
+/(
+  \.git
+  | \.venv
+  | env
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+# Let Black normalize quotes and string prefixes (f-strings, raw, etc.)
+skip-string-normalization = false
+
+# (Optional) Show diffs instead of rewriting in CI
+# check = true

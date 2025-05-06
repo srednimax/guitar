@@ -1,16 +1,27 @@
-# This is a sample Python script.
+import numpy as np
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from services.microphone_service import MicrophoneService
+from services.pitch_service import PitchService
 
+if __name__ == "__main__":
+    print("*** starting recording")
+    microphone_service = MicrophoneService()
+    pitch_service = PitchService()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    microphone_service.open_stream()
+    pitch_service.setup_pitch()
+    buffer_size = 1024
+    while True:
+        try:
+            audio_buffer = microphone_service.microphone.read(buffer_size)
+            signal = np.fromstring(audio_buffer, dtype=np.float32)
 
+            pitch = pitch_service.pitch(signal)[0]
+            confidence = pitch_service.pitch.get_confidence()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+            print("{} / {}".format(pitch, confidence))
+        except KeyboardInterrupt:
+            print("*** Ctrl+C pressed, exiting")
+        break
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print("*** done recording")

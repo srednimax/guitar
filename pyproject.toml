@@ -3,7 +3,7 @@
 line-length = 88
 
 # Target Python versions—adjust to suit your project
-target-version = ["py312"]
+target-version = ["py313"]
 
 # Only format .py files
 include = '\.py$'

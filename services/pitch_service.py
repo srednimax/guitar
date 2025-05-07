@@ -18,6 +18,6 @@ class PitchService:
         self.pitch = None
 
     def setup_pitch(self):
-        self.pitch = aubio.pitch("default", self.win_s, self.hop_s, self.sample_rate)
-        self.pitch.set_unit("midi")
+        self.pitch = aubio.pitch("yin", self.win_s, self.hop_s, self.sample_rate)
+        self.pitch.set_unit("Hz")
         self.pitch.set_tolerance(self.tolerance)

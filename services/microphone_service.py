@@ -6,7 +6,7 @@ class MicrophoneService:
     def __init__(
         self,
         audio=pyaudio.PyAudio(),
-        record_duration=0,
+        record_duration=None,
         buffer_size=1024,
         audio_format=pyaudio.paFloat32,
         sample_rate=SampleRateEnum.DVD,
@@ -27,6 +27,7 @@ class MicrophoneService:
             rate=self.sample_rate,
             input=True,
             frames_per_buffer=self.buffer_size,
+            input_device_index=1
         )
 
     def close_stream(self):
